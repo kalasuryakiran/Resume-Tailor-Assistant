@@ -1,0 +1,126 @@
+To create an AI-powered resume tailoring assistant that takes a resume and a job description as input and provides a match score, identifies missing skills, and rewrites the resume, you'd structure your prompts for a large language model (LLM) like Gemini.
+
+Here's how you can formulate the prompts, keeping in mind the AI logic and output structure you've defined:
+
+-----
+
+### **Core Prompt for Resume Tailoring Agent**
+
+This is the primary prompt you'd send to the Gemini API after extracting the resume and job description text.
+
+````
+You are an expert resume tailoring and career insights AI. Your goal is to help a job seeker optimize their resume for a specific job description without fabricating any experience. You will analyze both documents, provide a match score, identify gaps, and rewrite sections of the resume to better align with the job's requirements.
+
+---
+**USER RESUME CONTENT:**
+```text
+[PASTE EXTRACTED RESUME TEXT HERE FROM THE IMAGE PROVIDED]
+````
+
+-----
+
+**TARGET JOB DESCRIPTION CONTENT:**
+
+```text
+[PASTE TARGET JOB DESCRIPTION TEXT HERE]
+```
+
+-----
+
+**YOUR TASK: Analyze the provided User Resume and Target Job Description. Then, provide the following output in the exact structure specified:**
+
+**AI LOGIC & REASONING STEPS:**
+
+1.  **Extract Key Elements from JD:** Identify all essential skills (technical and soft), tools, technologies, responsibilities, and keywords from the `TARGET JOB DESCRIPTION CONTENT`.
+2.  **Compare and Contrast:** Compare these extracted elements with the `USER RESUME CONTENT`.
+3.  **Calculate Match Score:** Determine a percentage (0-100%) based on the degree of overlap and relevance between the resume's content and the job description's requirements. Give higher weight to explicitly stated "required" skills.
+4.  **Identify Missing/Underrepresented Skills:** List any important skills or keywords from the job description that are either completely absent from the resume or mentioned very weakly/implicitly.
+5.  **Strategize Resume Rewrite:**
+      * Review the `USER RESUME CONTENT` section by section (Professional Summary, Skills, Projects/Experience, etc.).
+      * For each section, identify opportunities to rephrase, expand, or add bullet points that incorporate the `Missing/Underrepresented Skills` (from step 4) *without inventing new experiences*.
+      * Focus on integrating implied experiences, highlighting relevant transferable skills, or re-framing existing achievements using the job description's language.
+      * Prioritize using action verbs and quantifiable results where possible.
+      * Maintain the professional tone and standard resume formatting (bullet points for experience, clear headings).
+      * Ensure the rewrite is concise and impactful.
+
+**OUTPUT STRUCTURE:**
+
+```
+Match Score: [0-100]%
+
+Missing Skills:
+- Skill 1 (if any)
+- Skill 2
+- ...
+
+Updated Resume:
+[
+    **PROFESSIONAL SUMMARY**
+    [Revised Professional Summary text]
+
+    **EDUCATION**
+    [Original Education section text]
+
+    **SKILLS**
+    [Revised Skills section text - integrate relevant keywords/tools here]
+
+    **PROJECTS EXPERIENCE**
+    [Revised Project Experience section. Focus on rephrasing bullet points to align with JD, incorporating skills from 'Missing Skills' where applicable and *authentically* related to existing projects. For example, if a project used data but didn't explicitly mention 'data visualization', and the JD requires it, rephrase a bullet point to highlight data visualization aspects of that project if true.]
+    * Project 1 Name: [Revised bullet points]
+    * Project 2 Name: [Revised bullet points]
+    ...
+
+    **CERTIFICATIONS**
+    [Original Certifications section text]
+
+    **VIRTUAL EXPERIENCE**
+    [Original Virtual Experience section text]
+
+    **HIGHLIGHTS**
+    [Original Highlights section text]
+]
+```
+
+**IMPORTANT RULES FOR UPDATED RESUME:**
+
+  * **DO NOT HALLUCINATE OR FABRICATE ANY EXPERIENCES.** Every piece of information in the `Updated Resume` must be derivable from the `USER RESUME CONTENT`, even if rephrased or emphasized.
+  * Integrate missing skills *only* if they are truly present, implied, or a natural extension of the user's existing experiences.
+  * Maintain the user's existing resume tone and professional format (headings, bullet points, concise language).
+  * Use strong action verbs.
+  * The layout of the `Updated Resume` should closely mirror the provided image's structure.
+
+-----
+
+```
+
+**Explanation for the Prompt:**
+
+1.  **Role Assignment:** "You are an expert resume tailoring and career insights AI." This helps set the context for the AI's behavior.
+2.  **Clear Objective:** States the primary goal: optimize resume without fabricating experience.
+3.  **Input Sections:** Clearly delineates where the AI should expect the resume and JD text. This is crucial for parsing.
+4.  **Explicit AI Logic & Reasoning Steps:** This section guides the AI's internal thought process.
+    * It tells the AI *how* to approach the problem (extract, compare, score, identify, strategize rewrite).
+    * This is especially helpful for complex tasks as it breaks them down into manageable steps for the model.
+    * It reiterates the non-fabrication rule within the "Strategize Resume Rewrite" step.
+5.  **Strict Output Structure:** This is paramount for programmatic use.
+    * It provides the exact headings (`Match Score`, `Missing Skills`, `Updated Resume`).
+    * It specifies the format for `Missing Skills` (bullet points).
+    * Crucially, it dictates the *internal structure* of the `Updated Resume` (headings like PROFESSIONAL SUMMARY, SKILLS, PROJECTS EXPERIENCE, etc., and bullet points for project details). This ensures the output is parsable and easy to integrate back into a PDF.
+6.  **Important Rules:** Reinforces the most critical constraints:
+    * No fabrication (repeated multiple times for emphasis).
+    * Authentic integration only.
+    * Maintain tone and format.
+    * Action/result-driven.
+    * **Crucially, mentions that the `Updated Resume` layout should mirror the provided image.**
+
+**How you would use this with your Python script:**
+
+1.  **Extract Resume:** Use PyMuPDF to extract text from `image_4a6784.png`.
+2.  **Extract JD:** Read the target job description from your `.txt` file or direct input.
+3.  **Construct Prompt:** Replace `[PASTE EXTRACTED RESUME TEXT HERE]` and `[PASTE TARGET JOB DESCRIPTION TEXT HERE]` with the actual extracted strings.
+4.  **Call Gemini API:** Send the constructed prompt to the Gemini API.
+5.  **Parse Response:** The response from Gemini should follow your `OUTPUT STRUCTURE`. You'll then parse this text to get the `Match Score`, `Missing Skills`, and the `Updated Resume` text.
+6.  **Generate PDF:** Use FPDF to take the `Updated Resume` text and render it into a PDF, mimicking the original image's layout as closely as possible. You'll need to define fonts, sizes, and positioning in your FPDF code to achieve this.
+
+By following this detailed prompting strategy, you provide the AI with a clear roadmap to achieve your desired resume tailoring functionality.
+```
