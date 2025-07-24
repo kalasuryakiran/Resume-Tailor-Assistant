@@ -74,9 +74,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       console.error("Upload error:", error);
-      res.status(500).json({ 
-        message: error instanceof Error ? error.message : "Failed to process uploaded file" 
-      });
+      
+      let errorMessage = "Failed to process uploaded file";
+      if (error instanceof Error) {
+        if (error.message.includes('image-based') || error.message.includes('scanned text')) {
+          errorMessage = error.message;
+        } else if (error.message.includes('Unable to process this PDF')) {
+          errorMessage = error.message;
+        } else {
+          errorMessage = `Upload failed: ${error.message}`;
+        }
+      }
+      
+      res.status(500).json({ message: errorMessage });
     }
   });
 

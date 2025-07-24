@@ -2,9 +2,6 @@ import * as fs from "fs";
 import * as path from "path";
 import { createWorker } from "tesseract.js";
 
-// Initialize PDF parser - will be loaded dynamically
-let pdfParser: any = null;
-
 export class FileProcessor {
   private static ocrWorker: any = null;
 
@@ -17,24 +14,56 @@ export class FileProcessor {
 
   static async extractTextFromPDF(filePath: string): Promise<string> {
     try {
-      // Dynamically import pdf-parse to avoid initialization issues
-      if (!pdfParser) {
-        try {
-          const pdfParseModule = await import("pdf-parse");
-          pdfParser = pdfParseModule.default;
-        } catch (importError) {
-          throw new Error("PDF processing is currently unavailable. Please try uploading the file as an image instead.");
+      // Use pdf2pic with dynamic import to convert PDF to images, then OCR
+      console.log('Converting PDF to images for OCR processing...');
+      
+      const pdf2pic = await import("pdf2pic");
+      const convert = pdf2pic.default;
+      
+      const options = {
+        density: 200,           // Output DPI
+        saveFilename: "page",   // Output filename
+        savePath: path.dirname(filePath), // Save to same directory
+        format: "png",          // Output format
+        width: 2000,           // Output width
+        height: 2000,          // Output height
+      };
+
+      const convertPDF = convert(filePath, options);
+      const results = await convertPDF.bulk(-1); // Convert all pages
+      
+      if (!results || results.length === 0) {
+        throw new Error('Failed to convert PDF pages to images');
+      }
+
+      let fullText = '';
+      
+      // Process each page with OCR
+      for (const result of results) {
+        if (result.path) {
+          try {
+            const pageText = await this.extractTextFromImage(result.path);
+            if (pageText.trim()) {
+              fullText += pageText + '\n\n';
+            }
+            
+            // Clean up temporary image file
+            fs.unlinkSync(result.path);
+          } catch (ocrError) {
+            console.error(`OCR failed for page ${result.name}:`, ocrError);
+          }
         }
       }
-      
-      const dataBuffer = fs.readFileSync(filePath);
-      const data = await pdfParser(dataBuffer);
-      return data.text;
-    } catch (error) {
-      if (error instanceof Error && error.message.includes("PDF processing is currently unavailable")) {
-        throw error;
+
+      const finalText = fullText.trim();
+      if (!finalText) {
+        throw new Error('No readable text found in the PDF. The document might be empty or contain only non-text content.');
       }
-      throw new Error(`Failed to extract text from PDF: ${error}`);
+
+      return finalText;
+    } catch (error) {
+      console.error('PDF extraction error:', error);
+      throw new Error(`PDF processing is currently unavailable. Please upload your resume as an image (PNG/JPG) instead for OCR processing.`);
     }
   }
 
