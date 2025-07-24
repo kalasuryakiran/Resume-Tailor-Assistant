@@ -70,11 +70,15 @@ export function FileUpload({ onTextExtracted }: FileUploadProps) {
 
   const handleFileUpload = (file: File) => {
     // Validate file type
-    const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+    const allowedTypes = [
+      'application/pdf', 
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+      'application/msword' // .doc
+    ];
     if (!allowedTypes.includes(file.type)) {
       toast({
         title: "Invalid File Type",
-        description: "Please upload a PDF, JPG, PNG, or WEBP file.",
+        description: "Please upload a PDF or Word document (.pdf, .doc, .docx).",
         variant: "destructive",
       });
       return;
@@ -138,7 +142,7 @@ export function FileUpload({ onTextExtracted }: FileUploadProps) {
               <CloudUpload className="h-12 w-12 text-gray-400 mx-auto" />
             </div>
             <p className="text-gray-600 mb-2">Drag and drop your resume here</p>
-            <p className="text-sm text-gray-500 mb-4">Supports PDF, PNG, JPG (Max 10MB)</p>
+            <p className="text-sm text-gray-500 mb-4">Supports PDF and Word documents (Max 10MB)</p>
             <Button 
               variant="default" 
               size="sm"
@@ -150,7 +154,7 @@ export function FileUpload({ onTextExtracted }: FileUploadProps) {
               id="file-upload"
               type="file"
               className="hidden"
-              accept=".pdf,.jpg,.jpeg,.png,.webp"
+              accept=".pdf,.doc,.docx"
               onChange={handleFileInputChange}
             />
           </div>
@@ -160,6 +164,8 @@ export function FileUpload({ onTextExtracted }: FileUploadProps) {
               <div className="flex-shrink-0">
                 {uploadedFile.type === 'application/pdf' ? (
                   <FileText className="h-8 w-8 text-red-500" />
+                ) : uploadedFile.type.includes('word') || uploadedFile.type.includes('document') ? (
+                  <FileText className="h-8 w-8 text-blue-500" />
                 ) : (
                   <FileCheck className="h-8 w-8 text-green-500" />
                 )}

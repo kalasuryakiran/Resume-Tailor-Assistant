@@ -18,16 +18,14 @@ const upload = multer({
   fileFilter: (req, file, cb) => {
     const allowedMimes = [
       'application/pdf',
-      'image/jpeg',
-      'image/jpg',
-      'image/png',
-      'image/webp'
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+      'application/msword' // .doc
     ];
     
     if (allowedMimes.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(new Error('Invalid file type. Only PDF, JPG, PNG, and WEBP files are allowed.'));
+      cb(new Error('Invalid file type. Only PDF and Word documents (.pdf, .doc, .docx) are allowed.'));
     }
   }
 });

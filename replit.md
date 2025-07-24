@@ -5,12 +5,13 @@
 This is an AI-powered resume tailoring assistant that helps job seekers optimize their resumes for specific job descriptions. The application analyzes uploaded resumes against job descriptions, provides match scores, identifies missing skills, and generates optimized resume content using Google's Gemini AI.
 
 **Status**: Fully functional and tested (January 2025)
-- ✓ File upload system working (PDF and image OCR)
+- ✓ File upload system working (PDF and Word documents)
 - ✓ Gemini AI integration providing detailed analysis
-- ✓ Match scoring system (overall, skills, experience)
+- ✓ Match scoring system (overall, skills, experience)  
 - ✓ Missing skills identification with priority levels
 - ✓ Resume optimization with authentic content enhancement
 - ✓ Actionable improvement suggestions
+- ✓ Support for PDF and Word document processing (.pdf, .doc, .docx)
 
 ## User Preferences
 
@@ -42,10 +43,10 @@ The application follows a modern full-stack architecture with clear separation b
 ## Key Components
 
 ### File Processing Service
-- Handles PDF and image file uploads (JPG, PNG, WEBP)
-- Extracts text content using appropriate parsers
-- OCR capability for image-based resumes
-- File validation and cleanup utilities
+- Handles PDF and Word document uploads (.pdf, .doc, .docx)
+- Extracts text content using pdf-parse and mammoth libraries
+- Robust file validation and cleanup utilities
+- Support for both traditional and modern document formats
 
 ### AI Analysis Service
 - Integrates with Google Gemini API for intelligent resume analysis
