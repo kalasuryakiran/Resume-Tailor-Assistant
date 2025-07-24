@@ -1,0 +1,52 @@
+JOHN SMITH
+Software Engineer
+Email: john.smith@email.com | Phone: (555) 123-4567
+LinkedIn: linkedin.com/in/johnsmith | GitHub: github.com/johnsmith
+
+PROFESSIONAL SUMMARY
+Experienced software engineer with 3+ years developing web applications using JavaScript, React, and Node.js. Strong background in full-stack development with expertise in database design and API development. Passionate about creating efficient, scalable solutions.
+
+TECHNICAL SKILLS
+• Programming Languages: JavaScript, Python, HTML, CSS
+• Frameworks & Libraries: React, Express.js, jQuery
+• Databases: MySQL, MongoDB
+• Tools: Git, VS Code, npm
+• Cloud Services: AWS (basic)
+
+PROFESSIONAL EXPERIENCE
+
+Software Developer | Tech Solutions Inc. | Jan 2022 - Present
+• Developed responsive web applications using React and JavaScript
+• Built RESTful APIs using Node.js and Express framework
+• Collaborated with team of 5 developers on agile projects
+• Reduced application load time by 30% through code optimization
+• Implemented user authentication and authorization systems
+
+Junior Web Developer | StartupXYZ | Jun 2021 - Dec 2021
+• Created dynamic websites using HTML, CSS, and JavaScript
+• Worked with MySQL databases to store and retrieve data
+• Participated in code reviews and team meetings
+• Fixed bugs and implemented new features based on user feedback
+
+PROJECTS
+
+E-commerce Platform (2023)
+• Built full-stack e-commerce application using React and Node.js
+• Integrated payment processing with Stripe API
+• Implemented product search and filtering functionality
+• Used MongoDB for product and user data storage
+
+Task Management App (2022)
+• Developed task tracking application with React frontend
+• Created REST API with Express.js backend
+• Implemented user authentication and data persistence
+• Deployed application to Heroku cloud platform
+
+EDUCATION
+Bachelor of Science in Computer Science
+State University | Graduated May 2021
+GPA: 3.7/4.0
+
+CERTIFICATIONS
+• AWS Cloud Practitioner (2022)
+• React Developer Certification (2021)
