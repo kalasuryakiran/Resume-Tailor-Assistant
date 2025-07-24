@@ -1,7 +1,15 @@
 import * as fs from "fs";
 import * as path from "path";
-import pdf from "pdf-parse";
 import mammoth from "mammoth";
+
+// Lazy load pdf-parse to avoid initialization issues
+let pdfParse: any = null;
+async function getPdfParse() {
+  if (!pdfParse) {
+    pdfParse = (await import("pdf-parse")).default;
+  }
+  return pdfParse;
+}
 
 export class FileProcessor {
 
@@ -9,6 +17,7 @@ export class FileProcessor {
     try {
       console.log('Extracting text from PDF...');
       const dataBuffer = fs.readFileSync(filePath);
+      const pdf = await getPdfParse();
       const data = await pdf(dataBuffer);
       
       const text = data.text.trim();
