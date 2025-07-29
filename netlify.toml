@@ -3,6 +3,9 @@
   publish = "dist/public"
   functions = "netlify/functions"
 
+[build.environment]
+  NODE_VERSION = "20"
+
 # API rewrite
 [[redirects]]
   from = "/api/*"
