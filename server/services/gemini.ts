@@ -1,9 +1,15 @@
 import { GoogleGenAI } from "@google/genai";
 import type { AnalysisResult, MissingSkill } from "@shared/schema";
 
-const ai = new GoogleGenAI({ 
-  apiKey: process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || "" 
-});
+const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+
+if (!apiKey) {
+  throw new Error(
+    "Missing Gemini API Key. Please set GEMINI_API_KEY or GOOGLE_API_KEY in a .env file"
+  );
+}
+
+const ai = new GoogleGenAI({ apiKey });
 
 export async function analyzeResumeWithGemini(
   resumeText: string, 
