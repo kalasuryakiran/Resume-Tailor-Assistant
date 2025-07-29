@@ -5,6 +5,7 @@
 
 [functions]
   node_bundler = "esbuild"
+  external_node_modules = ["canvas", "sharp"]
 
 [build.environment]
   NODE_VERSION = "20"
