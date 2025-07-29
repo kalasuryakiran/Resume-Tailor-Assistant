@@ -1,7 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import multer from "multer";
-import { storage } from "./storage";
 import { FileProcessor } from "./services/fileProcessor";
 import { analyzeResumeWithGemini } from "./services/gemini";
 import { resumeAnalysisSchema } from "@shared/schema";

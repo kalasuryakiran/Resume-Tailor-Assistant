@@ -4,7 +4,7 @@
 
 This is an AI-powered resume tailoring assistant that helps job seekers optimize their resumes for specific job descriptions. The application analyzes uploaded resumes against job descriptions, provides match scores, identifies missing skills, and generates optimized resume content using Google's Gemini AI.
 
-**Status**: Fully functional and tested (January 2025)
+**Status**: Fully functional and Netlify-ready (January 2025)
 - ✓ File upload system working (PDF and Word documents)
 - ✓ Gemini AI integration providing detailed analysis
 - ✓ Match scoring system (overall, skills, experience)  
@@ -33,7 +33,7 @@ The application follows a modern full-stack architecture with clear separation b
 - **Language**: TypeScript with ES modules
 - **File Processing**: Multer for file uploads, Tesseract.js for OCR, pdf-parse for PDF text extraction
 - **AI Integration**: Google Gemini API for resume analysis
-- **Database**: Drizzle ORM configured for PostgreSQL (using Neon Database)
+- **Storage**: Stateless architecture - no database required
 
 ### Shared Components
 - **Schema Validation**: Zod for runtime type validation
@@ -60,10 +60,10 @@ The application follows a modern full-stack architecture with clear separation b
 - **JobDescriptionInput**: Text area with clipboard integration
 - **AnalysisResults**: Comprehensive display of analysis results with copy/download functionality
 
-### Database Layer
-- User management schema (currently using in-memory storage)
-- Resume analysis request/response schemas
-- Extensible for future features like saved analyses
+### API Layer
+- Stateless resume analysis endpoints
+- File upload and processing endpoints
+- Health check and monitoring endpoints
 
 ## Data Flow
 
@@ -79,9 +79,9 @@ The application follows a modern full-stack architecture with clear separation b
 - **Google Gemini API**: Primary AI service for resume analysis and optimization
 - **Environment Variables**: `GEMINI_API_KEY` or `GOOGLE_API_KEY` required
 
-### Database
-- **Neon Database**: PostgreSQL database service
-- **Environment Variables**: `DATABASE_URL` required for production
+### Deployment
+- **Stateless Architecture**: No database dependencies for easy deployment
+- **Netlify Functions**: Serverless backend deployment ready
 
 ### File Processing
 - **Tesseract.js**: OCR processing for image files
