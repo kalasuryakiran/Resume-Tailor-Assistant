@@ -1,14 +1,15 @@
-import serverless from "serverless-http";
-import { app, start } from "../../server/app";
+const serverless = require("serverless-http");
 
-// Initialize the app for Netlify
-let initialized = false;
+// Use dynamic import for ESM modules
+let appInstance: any = null;
 
-export const handler = serverless(app, {
-  async request(req: any, event: any, context: any) {
-    if (!initialized) {
-      await start();
-      initialized = true;
-    }
+export const handler = async (event: any, context: any) => {
+  if (!appInstance) {
+    // Dynamically import the ESM modules
+    const { app, start } = await import("../../server/netlify-app");
+    await start();
+    appInstance = serverless(app);
   }
-});
+  
+  return appInstance(event, context);
+};

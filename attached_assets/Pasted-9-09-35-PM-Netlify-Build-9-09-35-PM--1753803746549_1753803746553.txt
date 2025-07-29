@@ -1,0 +1,131 @@
+9:09:35 PM: Netlify Build                                                 
+9:09:35 PM: ────────────────────────────────────────────────────────────────
+9:09:35 PM: ​
+9:09:35 PM: ❯ Version
+9:09:35 PM:   @netlify/build 34.3.0
+9:09:35 PM: ​
+9:09:35 PM: ❯ Flags
+9:09:35 PM:   accountId: 685f6d69f9c1d6dae8d76a60
+9:09:35 PM:   baseRelDir: true
+9:09:35 PM:   buildId: 6888eb2785a4a11d4ea76f4d
+9:09:35 PM:   deployId: 6888eb2785a4a11d4ea76f4f
+9:09:35 PM: ​
+9:09:35 PM: ❯ Current directory
+9:09:35 PM:   /opt/build/repo
+9:09:35 PM: ​
+9:09:35 PM: ❯ Config file
+9:09:35 PM:   /opt/build/repo/netlify.toml
+9:09:35 PM: ​
+9:09:35 PM: ❯ Context
+9:09:35 PM:   production
+9:09:35 PM: ​
+9:09:35 PM: build.command from netlify.toml                               
+9:09:35 PM: ────────────────────────────────────────────────────────────────
+9:09:35 PM: ​
+9:09:35 PM: $ npm run build
+9:09:36 PM: > rest-express@1.0.0 build
+9:09:36 PM: > vite build
+9:09:36 PM: vite v5.4.19 building for production...
+9:09:36 PM: transforming...
+9:09:36 PM: Browserslist: browsers data (caniuse-lite) is 9 months old. Please run:
+9:09:36 PM:   npx update-browserslist-db@latest
+9:09:36 PM:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+9:09:38 PM: ✓ 1671 modules transformed.
+9:09:38 PM: rendering chunks...
+9:09:39 PM: computing gzip size...
+9:09:39 PM: ../dist/public/index.html                   0.63 kB │ gzip:  0.38 kB
+9:09:39 PM: ../dist/public/assets/index-B5MxdjnD.css   61.04 kB │ gzip: 10.90 kB
+9:09:39 PM: ../dist/public/assets/index-BhSMf4qM.js   293.53 kB │ gzip: 93.46 kB
+9:09:39 PM: ✓ built in 2.60s
+9:09:39 PM: ​
+9:09:39 PM: (build.command completed in 3s)
+9:09:39 PM: ​
+9:09:39 PM: Functions bundling                                            
+9:09:39 PM: ────────────────────────────────────────────────────────────────
+9:09:39 PM: ​
+9:09:39 PM: Packaging Functions from netlify/functions directory:
+9:09:39 PM:  - api.ts
+9:09:39 PM: ​
+9:09:39 PM: ▲ [WARNING] "import.meta" is not available with the "cjs" output format and will be empty [empty-import-meta]
+9:09:39 PM:     server/vite.ts:71:32:
+9:09:39 PM:       71 │   const distPath = path.resolve(import.meta.dirname, "public");
+9:09:39 PM:          ╵                                 ~~~~~~~~~~~
+9:09:39 PM:   You need to set the output format to "esm" for "import.meta" to work correctly.
+9:09:39 PM: ✘ [ERROR] Top-level await is currently not supported with the "cjs" output format
+9:09:39 PM:     vite.config.ts:13:10:
+9:09:39 PM:       13 │           await import("@replit/vite-plugin-cartographer").then((m...
+9:09:39 PM:          ╵           ~~~~~
+9:09:39 PM: ▲ [WARNING] "import.meta" is not available with the "cjs" output format and will be empty [empty-import-meta]
+9:09:39 PM:     vite.config.ts:21:24:
+9:09:39 PM:       21 │       "@": path.resolve(import.meta.dirname, "client", "src"),
+9:09:39 PM:          ╵                         ~~~~~~~~~~~
+9:09:39 PM:   You need to set the output format to "esm" for "import.meta" to work correctly.
+9:09:39 PM: ▲ [WARNING] "import.meta" is not available with the "cjs" output format and will be empty [empty-import-meta]
+9:09:39 PM:     vite.config.ts:22:30:
+9:09:39 PM:       22 │       "@shared": path.resolve(import.meta.dirname, "shared"),
+9:09:39 PM:          ╵                               ~~~~~~~~~~~
+9:09:39 PM:   You need to set the output format to "esm" for "import.meta" to work correctly.
+9:09:39 PM: ▲ [WARNING] "import.meta" is not available with the "cjs" output format and will be empty [empty-import-meta]
+9:09:39 PM:     vite.config.ts:23:30:
+9:09:39 PM:       23 │ ...  "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+9:09:39 PM:          ╵                              ~~~~~~~~~~~
+9:09:39 PM:   You need to set the output format to "esm" for "import.meta" to work correctly.
+9:09:39 PM: ✘ [ERROR] Could not resolve "@babel/preset-typescript/package.json"
+9:09:39 PM:     node_modules/@babel/core/lib/config/files/module-types.js:171:36:
+9:09:39 PM:       171 │ ...t packageJson = require("@babel/preset-typescript/package.json");
+9:09:39 PM:           ╵                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+9:09:39 PM:   You can mark the path "@babel/preset-typescript/package.json" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle. You can also surround this "require" call with a try/catch block to handle this failure at run-time instead of bundle-time.
+9:09:39 PM: ✘ [ERROR] Could not resolve "../pkg"
+9:09:39 PM:     node_modules/lightningcss/node/index.js:17:27:
+9:09:39 PM:       17 │   module.exports = require(`../pkg`);
+9:09:39 PM:          ╵                            ~~~~~~~~
+9:09:40 PM: Failed during stage 'building site': Build script returned non-zero exit code: 2
+9:09:40 PM: ▲ [WARNING] "import.meta" is not available with the "cjs" output format and will be empty [empty-import-meta]
+9:09:40 PM:     vite.config.ts:26:21:
+9:09:40 PM:       26 │   root: path.resolve(import.meta.dirname, "client"),
+9:09:40 PM:          ╵                      ~~~~~~~~~~~
+9:09:40 PM:   You need to set the output format to "esm" for "import.meta" to work correctly.
+9:09:40 PM: ▲ [WARNING] "import.meta" is not available with the "cjs" output format and will be empty [empty-import-meta]
+9:09:40 PM:     vite.config.ts:28:25:
+9:09:40 PM:       28 │     outDir: path.resolve(import.meta.dirname, "dist/public"),
+9:09:40 PM:          ╵                          ~~~~~~~~~~~
+9:09:40 PM:   You need to set the output format to "esm" for "import.meta" to work correctly.
+9:09:40 PM: ▲ [WARNING] "esbuild" should be marked as external for use with "require.resolve" [require-resolve-not-external]
+9:09:40 PM:     node_modules/vite/node_modules/esbuild/lib/main.js:1653:36:
+9:09:40 PM:       1653 │   const libMainJS = require.resolve("esbuild");
+9:09:40 PM:            ╵                                     ~~~~~~~~~
+9:09:40 PM: 7 of 8 warnings and all 3 errors shown (disable the message limit with --log-limit=0)
+9:09:40 PM: ​
+9:09:40 PM: Dependencies installation error                               
+9:09:40 PM: ────────────────────────────────────────────────────────────────
+9:09:40 PM: ​
+9:09:40 PM:   Error message
+9:09:40 PM:   A Netlify Function failed to require one of its dependencies.
+9:09:40 PM:   Please make sure it is present in the site's top-level "package.json".
+​
+9:09:40 PM:   Build failed with 3 errors:
+9:09:40 PM:   node_modules/@babel/core/lib/config/files/module-types.js:171:36: ERROR: Could not resolve "@babel/preset-typescript/package.json"
+9:09:40 PM:   node_modules/lightningcss/node/index.js:17:27: ERROR: Could not resolve "../pkg"
+9:09:40 PM:   vite.config.ts:13:10: ERROR: Top-level await is currently not supported with the "cjs" output format
+9:09:40 PM: ​
+9:09:40 PM:   Resolved config
+9:09:40 PM:   build:
+9:09:40 PM:     command: npm run build
+9:09:40 PM:     commandOrigin: config
+9:09:40 PM:     environment:
+9:09:40 PM:       - GEMINI_API_KEY
+9:09:40 PM:       - NODE_VERSION
+9:09:40 PM:     publish: /opt/build/repo/dist/public
+9:09:40 PM:     publishOrigin: config
+9:09:40 PM:   functionsDirectory: /opt/build/repo/netlify/functions
+9:09:40 PM:   redirects:
+9:09:40 PM:     - from: /api/*
+      status: 200
+      to: /.netlify/functions/api/:splat
+    - from: /*
+      status: 200
+      to: /index.html
+  redirectsOrigin: config
+9:09:40 PM: Build failed due to a user error: Build script returned non-zero exit code: 2
+9:09:40 PM: Failing build: Failed to build site
+9:09:40 PM: Finished processing build request in 20.643s
