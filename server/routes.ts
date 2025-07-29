@@ -1,7 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import multer from "multer";
-import path from "path";
 import { storage } from "./storage";
 import { FileProcessor } from "./services/fileProcessor";
 import { analyzeResumeWithGemini } from "./services/gemini";
@@ -9,9 +8,8 @@ import { resumeAnalysisSchema } from "@shared/schema";
 import { z } from "zod";
 
 // Configure multer for file uploads
-const uploadDir = path.join(process.cwd(), 'uploads');
 const upload = multer({
-  dest: uploadDir,
+  storage: multer.memoryStorage(),
   limits: {
     fileSize: 10 * 1024 * 1024, // 10MB limit
   },
@@ -43,14 +41,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "No file uploaded" });
       }
 
-      const filePath = req.file.path;
+      const fileBuffer = req.file.buffer;
       const mimeType = req.file.mimetype;
 
       // Extract text from the uploaded file
-      const extractedText = await FileProcessor.extractTextFromFile(filePath, mimeType);
-      
-      // Clean up the uploaded file
-      FileProcessor.cleanup(filePath);
+      const extractedText = await FileProcessor.extractTextFromFile(fileBuffer, mimeType);
 
       if (!extractedText || extractedText.trim().length === 0) {
         return res.status(400).json({ 
@@ -66,11 +61,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
 
     } catch (error) {
-      // Clean up file on error
-      if (req.file?.path) {
-        FileProcessor.cleanup(req.file.path);
-      }
-      
       console.error("Upload error:", error);
       
       let errorMessage = "Failed to process uploaded file";
